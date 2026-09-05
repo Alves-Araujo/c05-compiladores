@@ -111,7 +111,7 @@ main{max-width:1640px;margin:0 auto;padding:28px 26px 80px}
 }
 
 .layout{display:grid;grid-template-columns:262px minmax(0,1fr);gap:36px;align-items:start}
-@media (max-width:900px){ .layout{grid-template-columns:1fr} .toc{display:none} }
+@media (max-width:900px){ .layout{grid-template-columns:minmax(0,1fr)} .toc{display:none} }
 
 .toc{position:sticky;top:96px;max-height:calc(100vh - 130px);overflow:auto;padding-right:6px}
 .toc h4{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 10px}
