@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jump of the Cat · Compiladores</title>
 <meta name="description" content="Jump of the Cat — caderno de estudos de Linguagens de Programação e Compiladores (C05): matéria, exercícios, laboratório de regex e formulário.">
-<meta name="theme-color" content="#0a0e13">
+<meta name="theme-color" content="#080d1a">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://alves-araujo.github.io/c05-compiladores/">
@@ -25,11 +25,36 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=202609051533">
+<script>
+/* Aplica o tema salvo antes da primeira pintura. Sem isto, quem escolheu o
+   tema claro ve um piscar escuro a cada carregamento, porque o data-theme so
+   era ajustado depois que os scripts do fim do body rodavam. */
+(function(){
+  try{
+    var d = JSON.parse(localStorage.getItem('jotc-estudos-v1') || '{}');
+    if(d.theme === 'light' || d.theme === 'dark'){
+      document.documentElement.dataset.theme = d.theme;
+      var tc = document.querySelector('meta[name="theme-color"]');
+      if(tc) tc.setAttribute('content', d.theme === 'light' ? '#f5f7fb' : '#080d1a');
+    }
+  }catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/css/style.css?v=202609051549">
 </head>
 <body>
 
 <a class="skip" href="#main">Pular para o conteúdo</a>
+
+<noscript>
+  <div style="max-width:620px;margin:72px auto;padding:22px 26px;border-radius:14px;
+              border:1px solid var(--linha,#243049);background:var(--surface,#111a2e);
+              color:var(--txt,#e6ecf7);font:16px/1.65 system-ui,-apple-system,sans-serif">
+    <strong style="display:block;font-size:18px;margin-bottom:8px">😼 Este caderno precisa de JavaScript.</strong>
+    A matéria, os exercícios, o Regex Lab e o formulário são montados dentro do seu
+    próprio navegador — o site não tem servidor. Ative o JavaScript para usá-lo.
+  </div>
+</noscript>
 
 <!-- fundo: aurora que respira + silhueta do campus -->
 <div class="bg-aurora" aria-hidden="true"></div>
@@ -178,16 +203,16 @@
   </div>
 </footer>
 
-<script src="data/conteudo.js?v=202609051533"></script>
-<script src="data/exercicios-originais.js?v=202609051533"></script>
-<script src="data/exercicios-ia.js?v=202609051533"></script>
-<script src="data/formulario.js?v=202609051533"></script>
-<script src="assets/js/materia.js?v=202609051533"></script>
-<script src="assets/js/exercicios.js?v=202609051533"></script>
-<script src="assets/js/regexlab.js?v=202609051533"></script>
-<script src="assets/js/formulario.js?v=202609051533"></script>
-<script src="assets/js/busca.js?v=202609051533"></script>
-<script src="assets/js/chat.js?v=202609051533"></script>
-<script src="assets/js/app.js?v=202609051533"></script>
+<script src="data/conteudo.js?v=202609051549"></script>
+<script src="data/exercicios-originais.js?v=202609051549"></script>
+<script src="data/exercicios-ia.js?v=202609051549"></script>
+<script src="data/formulario.js?v=202609051549"></script>
+<script src="assets/js/materia.js?v=202609051549"></script>
+<script src="assets/js/exercicios.js?v=202609051549"></script>
+<script src="assets/js/regexlab.js?v=202609051549"></script>
+<script src="assets/js/formulario.js?v=202609051549"></script>
+<script src="assets/js/busca.js?v=202609051549"></script>
+<script src="assets/js/chat.js?v=202609051549"></script>
+<script src="assets/js/app.js?v=202609051549"></script>
 </body>
 </html>

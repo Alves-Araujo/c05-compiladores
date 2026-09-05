@@ -27,28 +27,35 @@ const RX_REF = [
 
 let RX_WORKER = null, RX_TIMER = null, RX_SEM_WORKER = false;
 
+/* Fonte unica da regra de casamento. Roda como funcao normal na pagina e,
+   serializada com toString(), dentro do worker — para nao existirem duas
+   copias da mesma logica que possam divergir com o tempo.
+   Escrita em ES5 de proposito: o texto dela vai para dentro do Blob. */
+function rxCasar(src, flags, txt){
+  var re = new RegExp(src, flags.indexOf('g') >= 0 ? flags : flags + 'g');
+  var out = [], m, guard = 0;
+  while((m = re.exec(txt)) !== null){
+    out.push({i:m.index, s:m[0], g:Array.prototype.slice.call(m, 1), gn:m.groups || null});
+    if(m[0] === '') re.lastIndex++;
+    if(++guard > 5000) break;
+    if(flags.indexOf('g') < 0) break;
+  }
+  return out;
+}
+
 function rxExecutar(src, flags, texto, cb){
   const inline = () => {
-    try{
-      const re = new RegExp(src, flags.indexOf('g') >= 0 ? flags : flags + 'g');
-      const out = []; let m, guard = 0;
-      while((m = re.exec(texto)) !== null){
-        out.push({i:m.index, s:m[0], g:m.slice(1), gn:m.groups || null});
-        if(m[0] === '') re.lastIndex++;
-        if(++guard > 5000) break;
-        if(flags.indexOf('g') < 0) break;
-      }
-      cb({ok:true, matches:out});
-    }catch(e){ cb({ok:false, erro:e.message}); }
+    try{ cb({ok:true, matches: rxCasar(src, flags, texto)}); }
+    catch(e){ cb({ok:false, erro:e.message}); }
   };
 
   if(typeof Worker === 'undefined' || RX_SEM_WORKER){ inline(); return; }
   try{
     if(!RX_WORKER){
-      const code = 'onmessage=function(e){var d=e.data;try{var re=new RegExp(d.src,d.flags.indexOf("g")>=0?d.flags:d.flags+"g");' +
-        'var out=[],m,guard=0;while((m=re.exec(d.txt))!==null){out.push({i:m.index,s:m[0],g:Array.prototype.slice.call(m,1),gn:m.groups||null});' +
-        'if(m[0]==="")re.lastIndex++;if(++guard>5000)break;if(d.flags.indexOf("g")<0)break;}' +
-        'postMessage({ok:true,matches:out});}catch(err){postMessage({ok:false,erro:err.message});}}';
+      const code = rxCasar.toString() +
+        ';onmessage=function(e){var d=e.data;try{' +
+        'postMessage({ok:true,matches:rxCasar(d.src,d.flags,d.txt)});' +
+        '}catch(err){postMessage({ok:false,erro:err.message});}}';
       RX_WORKER = new Worker(URL.createObjectURL(new Blob([code], {type:'application/javascript'})));
     }
     clearTimeout(RX_TIMER);
