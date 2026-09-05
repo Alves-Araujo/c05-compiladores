@@ -25,7 +25,7 @@ const RX_REF = [
   ['^ $','início / fim'],['\\b','fronteira de palavra'],['\\.','ponto literal']
 ];
 
-let RX_WORKER = null, RX_TIMER = null;
+let RX_WORKER = null, RX_TIMER = null, RX_SEM_WORKER = false;
 
 function rxExecutar(src, flags, texto, cb){
   const inline = () => {
@@ -42,7 +42,7 @@ function rxExecutar(src, flags, texto, cb){
     }catch(e){ cb({ok:false, erro:e.message}); }
   };
 
-  if(typeof Worker === 'undefined'){ inline(); return; }
+  if(typeof Worker === 'undefined' || RX_SEM_WORKER){ inline(); return; }
   try{
     if(!RX_WORKER){
       const code = 'onmessage=function(e){var d=e.data;try{var re=new RegExp(d.src,d.flags.indexOf("g")>=0?d.flags:d.flags+"g");' +
@@ -53,8 +53,16 @@ function rxExecutar(src, flags, texto, cb){
     }
     clearTimeout(RX_TIMER);
     RX_WORKER.onmessage = e => { clearTimeout(RX_TIMER); cb(e.data); };
+    // Falha de worker e assincrona (ex.: blob: bloqueado em file://). Sem isto
+    // nenhuma resposta chega e o timeout culpa a regex do usuario por engano.
+    RX_WORKER.onerror = () => {
+      clearTimeout(RX_TIMER);
+      try{ RX_WORKER.terminate(); }catch(_){}
+      RX_WORKER = null; RX_SEM_WORKER = true;
+      inline();
+    };
     RX_TIMER = setTimeout(() => {
-      RX_WORKER.terminate(); RX_WORKER = null;
+      if(RX_WORKER){ RX_WORKER.terminate(); } RX_WORKER = null;
       cb({ok:false, erro:'A expressão demorou demais para ser avaliada (possível backtracking catastrófico). Simplifique-a.'});
     }, 1500);
     RX_WORKER.postMessage({src, flags, txt:texto});

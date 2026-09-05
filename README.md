@@ -74,7 +74,9 @@ O site é estático, então basta apontar o GitHub Pages para a raiz do reposit�
 │       ├── exercicios.js  → motor de correção
 │       ├── regexlab.js    → testador de regex (Web Worker + timeout)
 │       └── formulario.js  → folha de consulta
-└── data/                  → todo o conteúdo (é aqui que você mexe)
+├── data/                  → todo o conteúdo (é aqui que você mexe)
+├── build-single.py        → empacota o site inteiro num arquivo só
+└── bump-version.sh        → renova o ?v= dos assets depois de um deploy
 ```
 
 ## O tutor (aba Matéria)
