@@ -1,0 +1,5 @@
+# build de arquivo único (regenerável com: python3 build-single.py)
+dist/
+
+# macOS
+.DS_Store
