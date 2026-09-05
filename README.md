@@ -6,15 +6,19 @@
   <img src="https://img.shields.io/badge/JavaScript-0D1117?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
   <img src="https://img.shields.io/badge/HTML5-0D1117?style=for-the-badge&logo=html5&logoColor=E34F26" alt="HTML5" />
   <img src="https://img.shields.io/badge/CSS3-0D1117?style=for-the-badge&logo=css&logoColor=1572B6" alt="CSS3" />
-  <img src="https://img.shields.io/badge/GitHub_Pages-0D1117?style=for-the-badge&logo=githubpages&logoColor=FFFFFF" alt="GitHub Pages" />
 </p>
 
-Site estático de estudo para a disciplina **C05 — Linguagens de Programação e Compiladores**.
-Sem back-end, sem login, sem build: é só HTML, CSS e JavaScript puro.
+<p align="center">
+  <a href="https://alves-araujo.github.io/c05-compiladores/">
+    <img src="https://img.shields.io/badge/%E2%86%92_Acessar_o_site-ff3ee0?style=for-the-badge&labelColor=0D1117" alt="Acessar o site" />
+  </a>
+</p>
 
-> O nome é a dica do professor no Exemplo 4 do Cap. 2: *"faça cada parte separadamente, para depois
-> juntar todas e resolver o problema por completo. Esse é o 'Jump of the Cat!' para resolver um
-> REGEX mais complexo ;)"*
+Site estático de estudo para a disciplina **C05 — Linguagens de Programação e Compiladores**,
+reunindo a matéria, exercícios com correção automática, um laboratório de expressões regulares
+e uma folha de consulta impressa em um único lugar.
+
+Sem back-end, sem login e sem build: HTML, CSS e JavaScript puro, servido direto pelo GitHub Pages.
 
 ## O que tem
 
@@ -48,77 +52,12 @@ python3 -m http.server 8000
 
 E acessar <http://localhost:8000>.
 
-## Publicar no GitHub Pages
+## Publicar sua própria cópia
 
-```bash
-git init
-git add .
-git commit -m "Jump of the Cat - caderno de estudos de Compiladores"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/jotc.git
-git push -u origin main
-```
+O site é estático, então basta apontar o GitHub Pages para a raiz do repositório:
+**Settings → Pages → Source: Deploy from a branch → Branch `main` / `(root)`**.
 
-Antes de commitar uma alteração em CSS/JS, rode `./bump-version.sh` — ele atualiza o `?v=...` das
-tags de `<script>` e `<link>` no `index.html` para o navegador não servir a versão antiga do cache.
-
-No GitHub: **Settings → Pages → Source: Deploy from a branch → Branch: `main` / `(root)` → Save**.
-Em um ou dois minutos o site fica em `https://SEU-USUARIO.github.io/jotc/`.
-
-> O arquivo `.nojekyll` já está incluso para o GitHub não processar nada com o Jekyll.
-
-## Como adicionar a matéria da 2ª prova
-
-Todo o conteúdo mora na pasta `data/`, separado por prova. Cada arquivo exporta um objeto com as chaves
-`p1` e `p2` — a `p2` está vazia esperando o conteúdo. **Nenhum código precisa mudar**, só os dados.
-
-```
-data/
-├── conteudo.js             → capítulos da aba Matéria
-├── exercicios-originais.js → exercícios dos slides
-├── exercicios-ia.js        → exercícios gerados por IA
-└── formulario.js           → cards da folha de consulta
-```
-
-### Um capítulo novo (`data/conteudo.js`)
-
-```js
-p2: [{
-  id:'cap3',
-  titulo:'Cap. 3 — Análise Léxica (Parte 2)',
-  subtitulo:'Autômatos finitos e implementação do scanner.',
-  secoes:[
-    { id:'c3-1', num:'3.1', titulo:'Autômatos Finitos', blocos:[
-      {t:'p',  v:'Texto com <b>html</b> à vontade.'},
-      {t:'ul', v:['item um', 'item dois']},
-      {t:'table', head:['A','B'], rows:[['1','2']]},
-      {t:'code', lang:'c', v:'int main(){}'},
-      {t:'note', v:'Destaque importante.'}
-    ]}
-  ]
-}]
-```
-
-Blocos disponíveis: `p`, `h3`, `h4`, `ul`, `ol`, `table`, `code`, `note`, `cards`, `split`, `flow`, `flowh`, `svg`, `pipe`.
-Os comentários no topo de cada arquivo de dados mostram o formato exato de cada um.
-
-### Um exercício novo
-
-Os tipos aceitos e o que cada um espera:
-
-| `tipo` | Campos | Correção |
-| --- | --- | --- |
-| `tokenize` | `tokens:[{lex,cls}]`, `notas` | automática, lexema a lexema |
-| `regex` | `gabarito`, `aceita:[]`, `rejeita:[]`, `alt:[]` | automática — testa a expressão do aluno contra os casos, de forma ancorada |
-| `mc` | `opcoes:[]`, `correta:índice`, `just` | automática |
-| `multi` | `opcoes:[]`, `correta:[índices]`, `just` | automática |
-| `tf` | `itens:[{s,v,just}]` | automática |
-| `order` | `itens:[]` na ordem certa, `just` | automática |
-| `accept` | `strings:[{s,ok}]`, `just` | automática |
-| `open` | `gabarito`, `chaves:[{k,syn:[]}]` | mostra o gabarito + checagem de palavras-chave + auto-avaliação |
-
-**Importante:** mantenha os exercícios do professor em `exercicios-originais.js` e os criados por IA em
-`exercicios-ia.js`. A separação visual do site (selo 🤖, borda tracejada e aviso no topo) depende disso.
+> O arquivo `.nojekyll` já vem incluso para o GitHub não processar nada com o Jekyll.
 
 ## Estrutura
 
