@@ -1,6 +1,13 @@
-# 😼 Jump of the Cat
+<p align="center">
+  <img src="./assets/banner.svg" width="100%" alt="Jump of the Cat" />
+</p>
 
-**Caderno de estudos de Compiladores — C05**
+<p align="center">
+  <img src="https://img.shields.io/badge/JavaScript-0D1117?style=for-the-badge&logo=javascript&logoColor=F7DF1E" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/HTML5-0D1117?style=for-the-badge&logo=html5&logoColor=E34F26" alt="HTML5" />
+  <img src="https://img.shields.io/badge/CSS3-0D1117?style=for-the-badge&logo=css&logoColor=1572B6" alt="CSS3" />
+  <img src="https://img.shields.io/badge/GitHub_Pages-0D1117?style=for-the-badge&logo=githubpages&logoColor=FFFFFF" alt="GitHub Pages" />
+</p>
 
 Site estático de estudo para a disciplina **C05 — Linguagens de Programação e Compiladores**.
 Sem back-end, sem login, sem build: é só HTML, CSS e JavaScript puro.
