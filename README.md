@@ -24,12 +24,12 @@ Sem back-end, sem login e sem build: HTML, CSS e JavaScript puro, servido direto
 
 | Aba | O que faz |
 | --- | --- |
-| **📚 Matéria** | Conteúdo dos capítulos com índice lateral, diagramas e um passo a passo interativo das 6 fases do compilador. |
-| **✍️ Exercícios** | Duas coleções **separadas**: os exercícios **originais do material** (Exemplos 1 a 4) e exercícios **gerados por IA**, sempre identificados com o selo 🤖. Correção automática de tokenização, regex e questões objetivas; gabarito comentado nas discursivas. |
-| **🔎 Regex Lab** | Testador de expressões regulares no estilo do [rubular.com](https://rubular.com): destaque das ocorrências, tabela de grupos, flags e exemplos prontos do material. |
-| **📋 Formulário** | Folha de consulta com tudo que vale decorar. Tem busca e sai bonito no `Ctrl+P` (imprimir → salvar em PDF). |
-| **🔍 Busca (⌘K)** | Busca instantânea em **tudo** — matéria, exercícios e formulário — direto no navegador, sem servidor. Também monta um prompt com sua pergunta + os trechos encontrados para levar a dúvida a uma IA já com o material junto. |
-| **😼 Tutor** | Painel fixo à direita na aba Matéria. Sem configurar nada, responde com os trechos do próprio material e links para a seção. Com uma chave de API sua, vira um chat de verdade com o Claude — que recebe a matéria inteira da prova como contexto. |
+| **📚&nbsp;Matéria** | Conteúdo dos capítulos com índice lateral, diagramas e um passo a passo interativo das 6 fases do compilador. |
+| **✍️&nbsp;Exercícios** | Duas coleções **separadas**: os exercícios **originais do material** (Exemplos 1 a 4) e exercícios **gerados por IA**, sempre identificados com o selo 🤖. Correção automática de tokenização, regex e questões objetivas; gabarito comentado nas discursivas. |
+| **🔎&nbsp;Regex&nbsp;Lab** | Testador de expressões regulares no estilo do [rubular.com](https://rubular.com): destaque das ocorrências, tabela de grupos, flags e exemplos prontos do material. |
+| **📋&nbsp;Formulário** | Folha de consulta com tudo que vale decorar. Tem busca e sai bonito no `Ctrl+P` (imprimir → salvar em PDF). |
+| **🔍&nbsp;Busca** | Atalho **⌘K** (ou `Ctrl+K`). Busca instantânea em **tudo** — matéria, exercícios e formulário — direto no navegador, sem servidor. Também monta um prompt com sua pergunta + os trechos encontrados para levar a dúvida a uma IA já com o material junto. |
+| **😼&nbsp;Tutor** | Painel fixo à direita na aba Matéria. Sem configurar nada, responde com os trechos do próprio material e links para a seção. Com uma chave de API sua, vira um chat de verdade com o Claude — que recebe a matéria inteira da prova como contexto. |
 
 O seletor **P1 / P2** no topo troca a matéria da 1ª e da 2ª prova em todas as abas de uma vez.
 O progresso dos exercícios fica salvo no `localStorage` do navegador — nada é enviado para lugar nenhum.
