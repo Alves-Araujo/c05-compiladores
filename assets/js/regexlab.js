@@ -88,7 +88,8 @@ function renderRegexLab(root){
     '</div>' +
     '<div class="rx-grid"><div>' +
       '<div class="card">' +
-        '<label class="code-label">sua expressão regular</label>' +
+        '<div class="blk-head"><span class="ico">🔎</span><h2>Sua expressão regular</h2></div>' +
+        '<div class="blk-body">' +
         '<div class="rx-field"><span class="slash">/</span>' +
         '<input type="text" id="rxRe" class="mono" spellcheck="false" placeholder="[a-z]+[0-9]{2}">' +
         '<span class="slash r">/</span></div>' +
@@ -101,17 +102,23 @@ function renderRegexLab(root){
         '<div class="rx-status" id="rxStatus"></div>' +
         '<label class="code-label">texto de teste</label>' +
         '<textarea id="rxTxt" rows="7" class="mono" spellcheck="false" placeholder="cole aqui o texto onde a expressão será procurada"></textarea>' +
+        '</div>' +
       '</div>' +
-      '<div class="card"><label class="code-label">resultado</label><div class="rx-out" id="rxOut"></div>' +
-        '<div id="rxGroups"></div></div>' +
+      '<div class="card">' +
+        '<div class="blk-head"><span class="ico">✅</span><h2>Resultado</h2></div>' +
+        '<div class="blk-body"><div class="rx-out" id="rxOut"></div><div id="rxGroups"></div></div>' +
+      '</div>' +
     '</div><div>' +
-      '<div class="card"><h4 style="margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Exemplos do material</h4>' +
-        '<div class="rx-presets">' + RX_PRESETS.map((p,i) =>
-          '<button data-preset="' + i + '">' + esc(p.n) + '<code>' + esc(p.re) + '</code></button>').join('') + '</div></div>' +
-      '<div class="card rx-ref"><h4>Referência rápida</h4><div class="tbl-wrap"><table><tbody>' +
+      '<div class="card">' +
+        '<div class="blk-head"><span class="ico">📖</span><h2>Exemplos do material</h2></div>' +
+        '<div class="blk-body"><div class="rx-presets">' + RX_PRESETS.map((p,i) =>
+          '<button data-preset="' + i + '">' + esc(p.n) + '<code>' + esc(p.re) + '</code></button>').join('') + '</div></div></div>' +
+      '<div class="card rx-ref">' +
+        '<div class="blk-head"><span class="ico">📐</span><h2>Referência rápida</h2></div>' +
+        '<div class="blk-body"><div class="tbl-wrap"><table><tbody>' +
         RX_REF.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') +
       '</tbody></table></div>' +
-      '<p class="muted" style="font-size:11.5px;margin:10px 0 0">O motor aqui é o do JavaScript. O material usa a notação clássica de compiladores — <code>[.]</code> e <code>\\.</code> funcionam igual para o ponto literal.</p></div>' +
+      '<p class="muted" style="font-size:11.5px;margin:10px 0 0">O motor aqui é o do JavaScript. O material usa a notação clássica de compiladores — <code>[.]</code> e <code>\\.</code> funcionam igual para o ponto literal.</p></div></div>' +
     '</div></div>';
 
   const inRe = qs('#rxRe'), inTxt = qs('#rxTxt'), out = qs('#rxOut'), grp = qs('#rxGroups'), st = qs('#rxStatus');

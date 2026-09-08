@@ -104,7 +104,7 @@ function ativarReveal(root){
       });
     }, {rootMargin:'0px 0px -6% 0px', threshold:0.04});
   }
-  qsa('.card:not(.fm-card), .grupo, h2.sec, .stat, figure, .ex-switch button, .empty', root)
+  qsa('.card:not(.fm-card), .grupo, .stat, figure, .ex-switch button, .empty', root)
     .forEach((el, i) => {
       el.classList.add('reveal');
       el.style.transitionDelay = Math.min((i % 5) * 45, 180) + 'ms';

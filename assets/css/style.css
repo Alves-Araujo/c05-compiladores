@@ -137,11 +137,40 @@ main{max-width:1640px;margin:0 auto;padding:28px 26px 80px}
 .card > :first-child{margin-top:0}
 .card > :last-child{margin-bottom:0}
 
-h2.sec{font-size:21px;letter-spacing:-.02em;margin:34px 0 14px;scroll-margin-top:96px;display:flex;align-items:baseline;gap:10px}
-h2.sec .num{font-family:var(--mono);font-size:13px;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:7px;font-weight:700}
+/* Anatomia única de bloco em todas as abas: o título mora DENTRO do card,
+   numa faixa de cabeçalho, e o conteúdo vem abaixo — mesma estrutura dos
+   exercícios (.ex-head / .ex-body). Nada de título flutuando solto. */
+section[id]{scroll-margin-top:96px}
+.blk-head{
+  display:flex;align-items:baseline;gap:11px;padding:15px 24px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg, color-mix(in srgb,var(--accent) 7%, transparent), transparent);
+}
+.blk-head h2{margin:0;font-size:18.5px;letter-spacing:-.02em;line-height:1.35}
+.blk-head .num{
+  font-family:var(--mono);font-size:12.5px;color:var(--accent);background:var(--accent-soft);
+  padding:3px 9px;border-radius:7px;font-weight:700;flex:0 0 auto;
+}
+.blk-body{padding:20px 24px}
+/* qualquer card que use a faixa de cabeçalho cede o padding ao head/body */
+.card:has(> .blk-head){padding:0;overflow:hidden}
+.rx-ref .blk-body, .fm-card .blk-body{padding:16px 18px}
+
+/* dentro de um grupo, as seções viram partes do mesmo bloco:
+   sem borda própria, só uma linha separando — igual aos exercícios */
+.grupo-itens > .bloco{border-bottom:1px solid var(--border)}
+.grupo-itens > .bloco:last-child{border-bottom:0}
+.grupo-itens > .bloco > .blk-head{background:transparent;border-bottom:0;padding-bottom:0}
+.grupo-itens > .bloco > .blk-body{padding-top:14px}
+.grupo-head .grupo-en{margin-top:7px;color:var(--muted)}
+.grupo-head .grupo-tt h2{font-size:20px}
+.blk-body > :first-child{margin-top:0}
+.blk-body > :last-child{margin-bottom:0}
 h3.sub{font-size:16px;margin:22px 0 10px;letter-spacing:-.01em}
 /* tabelas e diagramas usam a largura toda; texto corrido, não */
-.card > p, .card > ul, .card > ol, .ex-body > p{max-width:88ch}
+.card > p, .card > ul, .card > ol,
+.blk-body > p, .blk-body > ul, .blk-body > ol,
+.ex-body > p{max-width:88ch}
 h4.sub2{font-size:14px;margin:16px 0 8px;color:var(--text)}
 p{margin:0 0 12px}
 ul,ol{margin:0 0 12px;padding-left:22px}
@@ -445,10 +474,10 @@ mark.m.empty{padding:0 2px;background:color-mix(in srgb,var(--warn) 40%,transpar
 /* ---------- Formulário ---------- */
 .fm-grid{columns:2 340px;column-gap:18px}
 @media (min-width:1400px){ .fm-grid{columns:3 340px} }
-.fm-grid .card{break-inside:avoid;display:inline-block;width:100%}
+.fm-grid .card{break-inside:avoid;display:inline-block;width:100%;overflow:hidden}
 .fm-search{margin-bottom:20px}
-.fm-card h3{margin:0 0 12px;font-size:15px;display:flex;align-items:center;gap:9px}
-.fm-card h3 .ico{font-size:17px}
+.fm-card .blk-head h2{font-size:15px}
+.blk-head .ico{font-size:17px;line-height:1;flex:0 0 auto}
 .fm-card table{font-size:13px}
 .fm-card td:first-child{font-family:var(--mono);color:var(--accent-text);white-space:nowrap;font-weight:600;width:1%}
 .kbd-list{display:grid;gap:7px}
@@ -471,7 +500,9 @@ mark.m.empty{padding:0 2px;background:color-mix(in srgb,var(--warn) 40%,transpar
   .topbar,.foot,.fm-search,.no-print{display:none !important}
   body{background:#fff;color:#000;font-size:11px}
   main{padding:0;max-width:none}
-  .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;padding:12px}
+  .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid;padding:0}
+  .blk-head{padding:8px 12px;background:none}
+  .blk-body{padding:10px 12px}
   .fm-grid{columns:2 280px}
   a{color:#000;text-decoration:none}
 }
@@ -540,8 +571,8 @@ main, .foot{position:relative; z-index:1}
   .page-head{animation:entra .5s cubic-bezier(.2,.7,.3,1) both}
   @keyframes entra{ from{opacity:0; transform:translateY(-8px)} to{opacity:1; transform:none} }
 
-  h2.sec .num{transition:transform .4s cubic-bezier(.2,1.6,.4,1), background .3s}
-  h2.sec.in .num{animation:pulsa .6s cubic-bezier(.2,1.6,.4,1) both}
+  .blk-head .num{transition:transform .4s cubic-bezier(.2,1.6,.4,1), background .3s}
+  .sec-card.in .blk-head .num{animation:pulsa .6s cubic-bezier(.2,1.6,.4,1) both}
   @keyframes pulsa{ 0%{transform:scale(.7)} 60%{transform:scale(1.12)} 100%{transform:scale(1)} }
 
   .minicard{transition:transform .18s, border-color .18s, box-shadow .18s}

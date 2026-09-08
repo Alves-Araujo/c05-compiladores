@@ -93,17 +93,24 @@ function renderMateria(root, prova){
   ).join('');
 
   const corpo = caps.map(c =>
-    '<article id="' + c.id + '" style="scroll-margin-top:96px">' +
-      '<div class="card" style="border-left:3px solid var(--accent)">' +
-        '<h2 style="margin:0 0 6px;font-size:22px;letter-spacing:-.02em">' + esc(c.titulo) + '</h2>' +
-        '<p class="muted" style="margin:0">' + esc(c.subtitulo) + '</p>' +
+    // o capítulo é UM bloco: cabeçalho + seções como partes dele,
+    // mesma anatomia dos grupos de exercícios (.grupo / .grupo-itens)
+    '<article class="grupo" id="' + c.id + '">' +
+      '<header class="grupo-head">' +
+        '<div class="grupo-tt"><h2>' + esc(c.titulo) + '</h2></div>' +
+        '<p class="grupo-en">' + esc(c.subtitulo) + '</p>' +
+      '</header>' +
+      '<div class="grupo-itens">' +
+        c.secoes.map(s =>
+          '<section class="bloco" id="' + s.id + '">' +
+            '<div class="blk-head">' +
+              (s.num ? '<span class="num">' + s.num + '</span>' : '') +
+              '<h2>' + esc(s.titulo) + '</h2>' +
+            '</div>' +
+            '<div class="blk-body">' + s.blocos.map(bl).join('') + '</div>' +
+          '</section>'
+        ).join('') +
       '</div>' +
-      c.secoes.map(s =>
-        '<section id="' + s.id + '">' +
-          '<h2 class="sec">' + (s.num ? '<span class="num">' + s.num + '</span>' : '') + esc(s.titulo) + '</h2>' +
-          '<div class="card">' + s.blocos.map(bl).join('') + '</div>' +
-        '</section>'
-      ).join('') +
     '</article>'
   ).join('');
 

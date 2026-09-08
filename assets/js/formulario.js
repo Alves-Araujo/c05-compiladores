@@ -15,7 +15,9 @@ function cardFormulario(c){
     corpo = '<div class="kbd-list">' + c.v.map(p => '<div><b>' + p[0] + '</b><span>' + p[1] + '</span></div>').join('') + '</div>';
   }
   return '<div class="card fm-card" id="' + c.id + '" data-busca="' + esc(norm(c.titulo + ' ' + JSON.stringify(c.v || c.rows || ''))) + '">' +
-    '<h3><span class="ico">' + c.ico + '</span>' + esc(c.titulo) + '</h3>' + corpo + '</div>';
+    '<div class="blk-head"><span class="ico">' + c.ico + '</span><h2>' + esc(c.titulo) + '</h2></div>' +
+    '<div class="blk-body">' + corpo + '</div>' +
+  '</div>';
 }
 
 function renderFormulario(root, prova){
