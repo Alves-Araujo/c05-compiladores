@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/banner.svg" width="100%" alt="Jump of the Cat" />
+  <img src="./assets/banner.svg?v=2" width="100%" alt="Jump of the Cat" />
 </p>
 
 <p align="center">
