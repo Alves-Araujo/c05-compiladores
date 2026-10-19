@@ -40,7 +40,8 @@ function renderExercicios(root, prova){
 
   if(!orig.length && !ia.length){ root.innerHTML = vazioP2('os exercícios'); return; }
 
-  const tab = DB.d.exTab === 'ia' ? 'ia' : 'orig';
+  // sem originais cadastrados para a prova (ex.: P2), abre direto a aba de IA
+  const tab = (DB.d.exTab === 'ia' || !orig.length) ? 'ia' : 'orig';
   const grupos = tab === 'ia' ? ia : orig;
   const nOrig = orig.reduce((a,g)=>a+g.itens.length,0);
   const nIA   = ia.reduce((a,g)=>a+g.itens.length,0);
@@ -58,7 +59,9 @@ function renderExercicios(root, prova){
     '<div class="ex-switch">' +
       '<button data-tab="orig" class="' + (tab==='orig'?'on':'') + '">' +
         '<span class="t">📘 Originais do material <span class="badge-src">material oficial</span></span>' +
-        '<span class="d">Exatamente os Exemplos 1 a 4 dos slides, com correção e gabarito comentado. ' + nOrig + ' questões.</span>' +
+        '<span class="d">' + (orig.length
+          ? 'Exatamente os Exemplos 1 a 4 dos slides, com correção e gabarito comentado. ' + nOrig + ' questões.'
+          : 'Os exemplos originais desta prova ainda não foram cadastrados.') + '</span>' +
       '</button>' +
       '<button data-tab="ia" class="ai ' + (tab==='ia'?'on':'') + '">' +
         '<span class="t">🤖 Gerados por IA <span class="badge-ai">feito por IA</span></span>' +

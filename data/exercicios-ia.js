@@ -1,7 +1,7 @@
 /* =============================================================
-   EXERCÍCIOS GERADOS POR IA  (Prova 1)
+   EXERCÍCIOS GERADOS POR IA  (Provas 1 e 2)
    ⚠️ NÃO fazem parte do material oficial da disciplina.
-   Foram escritos por IA a partir do conteúdo dos capítulos 1 e 2
+   Foram escritos por IA a partir do conteúdo dos capítulos (Cap. 1 e 2 na P1; Cap. 2 e 3 na P2)
    para servir de treino extra. Confira sempre com os slides.
 
    Tipos: 'mc' | 'multi' | 'tf' | 'order' | 'tokenize' | 'regex' | 'accept' | 'open'
@@ -218,4 +218,246 @@ const EX_IA = { p1:[
   ]
 }
 
-], p2:[] };
+], p2:[
+
+/* ---------------- Cap.2 Parte 2 múltipla escolha ---------------- */
+{
+  grupo:'Cap. 2 (Parte 2) — Múltipla escolha',
+  fonte:'gerado por IA a partir do Cap. 2 (Parte 2)',
+  enunciado:'Marque a alternativa correta em cada questão.',
+  itens:[
+  { id:'b-mc1', tipo:'mc', titulo:'1) Quíntupla', enunciado:'Em A = (Q, Σ, δ, q0, F), qual componente indica o estado inicial?',
+    opcoes:['Q','Σ','q0','F'], correta:2,
+    just:'<b>q0</b> é o estado inicial. F é o conjunto de estados de aceitação.' },
+  { id:'b-mc2', tipo:'mc', titulo:'2) Determinismo', enunciado:'Em um AFD, para um mesmo estado e um mesmo símbolo lido, quantos estados seguintes são possíveis?',
+    opcoes:['Nenhum','Exatamente um','Um ou mais','Qualquer número'], correta:1,
+    just:'É a restrição do determinismo: δ devolve um único estado. Quando não há seta para o símbolo lido, a cadeia é rejeitada.' },
+  { id:'b-mc3', tipo:'mc', titulo:'3) Estado de aceitação', enunciado:'Como um estado de aceitação é marcado no diagrama de transição?',
+    opcoes:['Com uma seta de entrada','Com um círculo duplo','Com um asterisco ao lado do nome','Com um losango'], correta:1,
+    just:'Círculo duplo. O asterisco é usado na <b>tabela</b> de transição.' },
+  { id:'b-mc4', tipo:'mc', titulo:'4) Tabela de transição', enunciado:'Na tabela de transição, qual símbolo marca o estado inicial e qual marca os estados de aceitação?',
+    opcoes:['-> e *','* e ->','| e =','> e <'], correta:0,
+    just:'A seta (<code>-&gt;</code>) marca o estado inicial; o asterisco (<code>*</code>) marca os estados de aceitação.' },
+  { id:'b-mc5', tipo:'mc', titulo:'5) Fita de entrada', enunciado:'Qual é a função da fita de entrada em um autômato finito?',
+    opcoes:['Guardar a função de transição','Conter a palavra a ser processada, símbolo por símbolo','Marcar os estados de aceitação','Armazenar o estado atual'], correta:1,
+    just:'A fita contém a informação a ser processada. O estado atual fica na unidade de controle.' },
+  { id:'b-mc6', tipo:'mc', titulo:'6) AFN', enunciado:'Qual afirmação sobre os AFNs é verdadeira?',
+    opcoes:['Não podem ter mais de uma transição com o mesmo símbolo a partir de um estado','Podem ter ε-transições, e a função de transição devolve um conjunto de estados','Todo AFN é também um AFD','Não reconhecem linguagens regulares'], correta:1,
+    just:'O AFN devolve um conjunto de estados e pode usar ε-transições. Não é verdade que todo AFN seja AFD.' },
+  { id:'b-mc7', tipo:'mc', titulo:'7) Construção de Thompson', enunciado:'Na Construção de Thompson, qual operação liga por uma ε-transição o estado de aceitação de r de volta ao estado inicial de r?',
+    opcoes:['Concatenação','União (r|s)','Repetição positiva (+)','Símbolo básico'], correta:2,
+    just:'É a repetição (+). O fecho de Kleene (*) usa essa mesma ideia e ainda acrescenta uma ε-transição do novo início ao novo fim, para aceitar a cadeia vazia.' },
+  { id:'b-mc8', tipo:'mc', titulo:'8) Subconjuntos', enunciado:'Na conversão AFN → AFD pelo produto cartesiano, quantos conjuntos de estados existem, no máximo, para um AFN com k estados?',
+    opcoes:['k','k²','2^k','k!'], correta:2,
+    just:'São 2<sup>k</sup> combinações, incluindo o conjunto vazio. Por isso o AFD pode ter até 2<sup>k</sup> estados.' },
+  { id:'b-mc9', tipo:'mc', titulo:'9) ε-fecho', enunciado:'O ε-fecho de um estado s sempre contém:',
+    opcoes:['Apenas o símbolo a ser lido','Somente os estados de aceitação','O próprio s e todos os estados alcançáveis a partir de s por ε-transições','Todos os estados do autômato'], correta:2,
+    just:'O ε-fecho é o conjunto de estados alcançáveis por zero ou mais ε-transições, e ele sempre contém o próprio estado.' }
+  ]
+},
+
+/* ---------------- Cap.2 Parte 2 verdadeiro ou falso ---------------- */
+{
+  grupo:'Cap. 2 (Parte 2) — Verdadeiro ou falso',
+  fonte:'gerado por IA a partir do Cap. 2 (Parte 2)',
+  enunciado:'Questões de fixação sobre AFDs e AFNs.',
+  itens:[
+  { id:'b-tf1', tipo:'tf', titulo:'Verdadeiro ou falso',
+    itens:[
+      {s:'A quíntupla de um AFD é formada por Q, Σ, δ, q0 e F.', v:true, just:'São exatamente os cinco componentes da definição.'},
+      {s:'Um AFD pode ter duas transições diferentes saindo do mesmo estado com o mesmo símbolo.', v:false, just:'Isso é o não determinismo, próprio dos AFNs.'},
+      {s:'Um AFD pode usar ε-transições.', v:false, just:'AFDs não podem usar transições com vazio. Isso é permitido nos AFNs.'},
+      {s:'Todo AFD é também um AFN.', v:true, just:'O AFD é um caso particular de AFN: cada conjunto de estados tem um único elemento.'},
+      {s:'Nem todo AFN é um AFD.', v:true, just:'Um AFN pode ter várias saídas para o mesmo símbolo, o que um AFD não permite.'},
+      {s:'Na tabela de transição, o asterisco (*) marca o estado inicial.', v:false, just:'A seta (-&gt;) marca o inicial. O asterisco marca os estados de aceitação.'},
+      {s:'Em um AFD, se não há seta para o símbolo lido a partir do estado atual, a cadeia é rejeitada.', v:true, just:'Essa é a convenção dos diagramas: a ausência de seta equivale a rejeição.'},
+      {s:'O conjunto F de um AFD pode ser vazio.', v:true, just:'Nesse caso o autômato rejeita todas as cadeias, o que é permitido pela definição.'}
+    ]},
+  ]
+},
+
+/* ---------------- Cap.2 Parte 2 ordenação ---------------- */
+{
+  grupo:'Cap. 2 (Parte 2) — Ordene o método',
+  fonte:'gerado por IA a partir do Cap. 2 (Parte 3)',
+  enunciado:'Os métodos de conversão têm passos numerados. Coloque-os na ordem correta.',
+  itens:[
+  { id:'b-ord1', tipo:'order', titulo:'Conversão AFN → AFD (sem ε-transições)',
+    enunciado:'Ordene os 8 passos da conversão de um AFN sem ε-transições para um AFD.',
+    itens:[
+      'Construir a tabela de transições do AFN',
+      'Construir a tabela do AFD pelo produto cartesiano dos estados do AFN (incluindo o conjunto vazio)',
+      'Marcar como candidatos a aceitação os conjuntos que contêm um estado de aceitação do AFN',
+      'Preencher as transições de cada conjunto por símbolo (união quando houver mais de um estado)',
+      'Eliminar os estados inacessíveis',
+      'Montar o AFD a partir da tabela de transições',
+      'Eliminar os estados sem saída para outro estado e que não são finais',
+      'Testar se as entradas válidas do AFN também são válidas no AFD'
+    ],
+    just:'Segue o método de 8 passos do material (§2.12.1).' },
+  { id:'b-ord2', tipo:'order', titulo:'Conversão AFN-ε → AFD',
+    enunciado:'Ordene os 6 passos da conversão de um AFN com ε-transições para um AFD.',
+    itens:[
+      'Calcular o ε-fecho do estado inicial do AFN-ε, que será o estado inicial do AFD',
+      'Montar uma tabela com os fechamentos encontrados e dar um nome a cada um',
+      'Para cada conjunto e símbolo, calcular S_a e o ε-fecho de S_a',
+      'Repetir até não surgirem novos estados nem transições',
+      'Marcar como aceitação os conjuntos que contêm um estado de aceitação do AFN-ε',
+      'Desenhar o AFD resultante'
+    ],
+    just:'Método de 6 passos do material (§2.12.2).' }
+  ]
+},
+
+/* ---------------- Cap.2 Parte 2 aceita ou rejeita ---------------- */
+{
+  grupo:'Cap. 2 (Parte 2) — A cadeia é aceita?',
+  fonte:'gerado por IA a partir do Cap. 2 (Parte 2)',
+  enunciado:'Para cada expressão, decida se a cadeia pertence à linguagem. Considere que a expressão precisa casar a cadeia <b>inteira</b>.',
+  itens:[
+  { id:'b-ac1', tipo:'accept', titulo:'A) <code>[0-9]+(\\.[0-9]+)?</code> (inteiro ou decimal)',
+    strings:[{s:'77',ok:true},{s:'3.14',ok:true},{s:'360.5',ok:true},{s:'3.',ok:false},{s:'.5',ok:false},{s:'1.2.3',ok:false}],
+    just:'Um ou mais dígitos, com uma parte decimal opcional. Quando existe ponto, precisa haver dígitos antes e depois dele.' },
+  { id:'b-ac2', tipo:'accept', titulo:'B) <code>letra(letra|digito)*</code> (letra = a–z ou A–Z; digito = 0–9)',
+    strings:[{s:'SUMMEROF69',ok:true},{s:'x',ok:true},{s:'A1b2',ok:true},{s:'9x',ok:false},{s:'a_b',ok:false},{s:'',ok:false}],
+    just:'Começa obrigatoriamente com letra; depois, zero ou mais letras ou dígitos. Por isso “9x” e a cadeia vazia são rejeitadas.' },
+  { id:'b-ac3', tipo:'accept', titulo:'C) <code>(ab)*c</code>',
+    strings:[{s:'c',ok:true},{s:'ababc',ok:true},{s:'abac',ok:false},{s:'abcb',ok:false},{s:'abc',ok:false}],
+    just:'Zero ou mais repetições do bloco “ab” seguidas de um “c” obrigatório no fim.' }
+  ]
+},
+
+/* ---------------- Cap.2 Parte 3 escreva a REGEX ---------------- */
+{
+  grupo:'Cap. 2 (Parte 3) — Escreva a REGEX',
+  fonte:'gerado por IA a partir do Cap. 2 (Parte 3)',
+  enunciado:'Sua expressão é testada contra casos que devem casar e casos que não devem casar, sempre de forma ancorada.',
+  itens:[
+  { id:'b-rx1', tipo:'regex', titulo:'A) Cadeias de 0 e 1 que terminam em 00', enunciado:'Sobre Σ = {0,1}. Ex.: <code>100</code> e <code>000</code>.',
+    gabarito:'(0|1)*00', alt:['[01]*00'], dica:'Qualquer sequência de 0s e 1s, seguida de “00” no fim.',
+    aceita:['00','100','0100','000'], rejeita:['0','01','10',''] },
+  { id:'b-rx2', tipo:'regex', titulo:'B) Cadeias de 0 e 1 que contêm a substring 01', enunciado:'Sobre Σ = {0,1}. Ex.: <code>1010</code>.',
+    gabarito:'[01]*01[01]*', alt:['(0|1)*01(0|1)*'], dica:'Algo qualquer, depois o bloco “01”, depois algo qualquer.',
+    aceita:['01','1010','0011','001'], rejeita:['0','1','10','1100'] },
+  { id:'b-rx3', tipo:'regex', titulo:'C) Cadeias de 0 e 1 que começam com 1 e terminam com 0', enunciado:'Sobre Σ = {0,1}. Ex.: <code>1010</code>.',
+    gabarito:'1[01]*0', alt:['1(0|1)*0'], dica:'Um “1” obrigatório no início e um “0” obrigatório no fim, com qualquer coisa no meio.',
+    aceita:['10','1010','1000'], rejeita:['1','0','01','0110'] },
+  { id:'b-rx4', tipo:'regex', titulo:'D) Número real com sinal opcional', enunciado:'Ex.: <code>-3.5</code>, <code>+2</code>, <code>10</code>.',
+    gabarito:'[+-]?[0-9]+([.][0-9]+)?', dica:'Sinal opcional, dígitos, e uma parte decimal opcional. Use <code>[.]</code> para o ponto literal.',
+    aceita:['-3.5','+2','10','0.0'], rejeita:['3.','.5','--1','1,5','+'] }
+  ]
+},
+
+/* ---------------- Cap.3 verdadeiro ou falso ---------------- */
+{
+  grupo:'Cap. 3 — Verdadeiro ou falso',
+  fonte:'gerado por IA a partir do Cap. 3',
+  enunciado:'Questões de fixação sobre gramáticas, derivações e árvores.',
+  itens:[
+  { id:'b-tf2', tipo:'tf', titulo:'Verdadeiro ou falso',
+    itens:[
+      {s:'Na gramática E -> E O E | -E | (E) | id, a cadeia -(id + id) pode ser derivada.', v:true, just:'Veja a derivação do Exemplo 4.'},
+      {s:'Uma derivação mais à esquerda e uma mais à direita da mesma cadeia sempre geram árvores diferentes.', v:false, just:'Podem gerar a mesma árvore. A árvore filtra a ordem das substituições (ver Exemplo 8).'},
+      {s:'Em uma GLC, os não terminais são os tokens recebidos do analisador léxico.', v:false, just:'Os tokens são os <b>terminais</b>. Os não terminais são variáveis sintáticas.'},
+      {s:'O símbolo inicial S é um não terminal.', v:true, just:'Ele representa a linguagem gerada pela gramática.'},
+      {s:'Na árvore de derivação, os filhos de um nó são rotulados da direita para a esquerda.', v:false, just:'A ordem é da <b>esquerda para a direita</b>, pelos símbolos do corpo da produção.'},
+      {s:'Uma expressão regular basta para descrever a estrutura aninhada de expressões com parênteses.', v:false, just:'Estruturas aninhadas e recursivas pedem gramáticas livres de contexto.'}
+    ]}
+  ]
+},
+
+/* ---------------- Cap.3 múltipla escolha ---------------- */
+{
+  grupo:'Cap. 3 — Múltipla escolha',
+  fonte:'gerado por IA a partir do Cap. 3',
+  enunciado:'Marque a alternativa correta em cada questão.',
+  itens:[
+  { id:'b-mc10', tipo:'mc', titulo:'10) Zeros consecutivos', enunciado:'Na gramática S -> 1S | 0A | ε; A -> 1S | 0B | ε; B -> 1S | ε, qual é o maior número de zeros consecutivos que podem ser gerados?',
+    opcoes:['1','2','3','Qualquer número'], correta:1,
+    just:'De S vai-se a 0A, de A a 0B, e B só gera 1S ou ε. Por isso o máximo são dois zeros seguidos.' },
+  { id:'b-mc11', tipo:'mc', titulo:'11) Cabeça da produção', enunciado:'Em uma produção de GLC, o que fica do lado esquerdo do símbolo de produção?',
+    opcoes:['Um terminal','O corpo da produção','O não terminal de cabeça','Sempre o símbolo inicial'], correta:2,
+    just:'A cabeça (lado esquerdo) é sempre um <b>não terminal</b>.' },
+  { id:'b-mc12', tipo:'mc', titulo:'12) Raiz da árvore', enunciado:'Na árvore de derivação de <code>num + num</code>, com as regras <code>exp -> exp op exp | ( exp ) | num</code>, qual é a raiz?',
+    opcoes:['num','op','exp','+'], correta:2,
+    just:'A raiz representa o primeiro passo, que aplica <code>exp -&gt; exp op exp</code>, e é rotulada com o não terminal <code>exp</code>.' },
+  { id:'b-mc13', tipo:'mc', titulo:'13) Folhas', enunciado:'Quantas folhas tem a árvore de derivação de <code>(num - num) * num</code>, contando os parênteses?',
+    opcoes:['5','6','7','8'], correta:2,
+    just:'As folhas são os terminais da cadeia: <code>( num - num ) * num</code>, ou seja, 7 tokens.' },
+  { id:'b-mc14', tipo:'mc', titulo:'14) Pré-ordem', enunciado:'Qual é a ordem da enumeração em pré-ordem dos nós de uma árvore de derivação?',
+    opcoes:['Esquerda, raiz, direita','Raiz, esquerda, direita','Filhos antes do pai','Por nível'], correta:1,
+    just:'Pré-ordem = raiz, esquerda, direita. É a ordem em que o material enumera os passos de derivação.' }
+  ]
+},
+
+/* ---------------- Cap.3 ordenação ---------------- */
+{
+  grupo:'Cap. 3 — Ordene a derivação',
+  fonte:'gerado por IA a partir do Cap. 3',
+  enunciado:'Coloque os passos na ordem da derivação.',
+  itens:[
+  { id:'b-ord3', tipo:'order', titulo:'Derivação mais à esquerda de -(id + id)',
+    enunciado:'Gramática: E -> E O E | -E | (E) | id; O -> + | - | *. Ordene os passos da derivação mais à esquerda.',
+    itens:['E ⇒ -E','⇒ -(E)','⇒ -(E O E)','⇒ -(id O E)','⇒ -(id + E)','⇒ -(id + id)'],
+    just:'Em cada passo substitui-se o não terminal mais à esquerda.' }
+  ]
+},
+
+/* ---------------- Cap.3 discursivas ---------------- */
+{
+  grupo:'Discursivas — Parte 2 e Cap. 3',
+  fonte:'gerado por IA a partir dos Caps. 2 (Partes 2 e 3) e 3',
+  enunciado:'Escreva sua resposta, compare com o gabarito e marque se acertou. Ideal para a parte dissertativa da prova.',
+  itens:[
+  { id:'b-op1', tipo:'open', titulo:'1) AFN × AFD',
+    enunciado:'Por que o AFN é mais fácil de construir do que o AFD, e qual é a consequência no tempo de reconhecimento?',
+    gabarito:'O AFN permite várias transições para o mesmo símbolo e ε-transições, o que facilita modelar padrões como uniões e repetições diretamente. Em compensação, para reconhecer uma cadeia ele pode precisar explorar vários caminhos, então em geral gasta mais tempo. O AFD é mais difícil de construir, mas sua saída é previsível e ele reconhece as cadeias em tempo menor.',
+    chaves:[
+      {k:'varias transicoes / epsilon facilitam a construcao', syn:['varias transicoes','várias transições','epsilon','ε','vazio','facilit']},
+      {k:'AFN explora mais caminhos: mais tempo', syn:['tempo','caminhos','mais lento','demora']},
+      {k:'AFD: saída previsível', syn:['previs','unica','única','determin']}
+    ] },
+  { id:'b-op2', tipo:'open', titulo:'2) ε-fecho',
+    enunciado:'O que é o ε-fecho de um estado e por que ele é usado na conversão de AFN-ε em AFD?',
+    gabarito:'O ε-fecho de um estado é o conjunto de estados alcançáveis a partir dele por zero ou mais ε-transições (e sempre contém o próprio estado). Ele é usado para tratar as transições “invisíveis” na conversão, de modo que cada novo estado do AFD passa a ser um <b>conjunto</b> de estados do AFN-ε.',
+    chaves:[
+      {k:'estados alcancaveis / atingiveis', syn:['alcancavel','alcançável','alcanc','atingivel','atingível','atinge']},
+      {k:'zero ou mais epsilon-transicoes', syn:['zero','epsilon','ε','vazio']},
+      {k:'conjunto de estados no AFD', syn:['conjunto']}
+    ] },
+  { id:'b-op3', tipo:'open', titulo:'3) Thompson para r|s',
+    enunciado:'Descreva a Construção de Thompson para a união r|s.',
+    gabarito:'Adiciona-se um novo estado inicial, com ε-transições para o estado inicial de r e para o estado inicial de s. O estado de aceitação de r e o de s ganham ε-transições para um novo estado de aceitação. Assim, a máquina aceita tudo o que r ou s aceitam.',
+    chaves:[
+      {k:'novo estado inicial com epsilon', syn:['novo estado inicial','novo inicial','inicial']},
+      {k:'novo estado de aceitacao com epsilon', syn:['novo estado de aceitacao','novo estado de aceitação','novo estado final','novo final']},
+      {k:'ligados por epsilon-transicoes', syn:['epsilon','ε','vazio']}
+    ] },
+  { id:'b-op4', tipo:'open', titulo:'4) Regex × gramática',
+    enunciado:'Por que a análise sintática não pode ser feita somente com expressões regulares?',
+    gabarito:'Expressões regulares descrevem padrões de tokens sem estrutura aninhada. A sintaxe das linguagens de programação tem estruturas recursivas (parênteses aninhados, expressões dentro de expressões), que exigem uma gramática livre de contexto (GLC) para serem descritas.',
+    chaves:[
+      {k:'estrutura recursiva / aninhada', syn:['recurs','aninh']},
+      {k:'gramatica livre de contexto', syn:['gramatica','gramática','glc','livre de contexto']}
+    ] },
+  { id:'b-op5', tipo:'open', titulo:'5) Derivação à esquerda × à direita',
+    enunciado:'Diferencie a derivação mais à esquerda da mais à direita e diga o que elas têm em comum na árvore.',
+    gabarito:'A derivação mais à esquerda substitui sempre o não terminal mais à esquerda em cada forma; a mais à direita substitui sempre o mais à direita. As duas podem gerar a <b>mesma árvore de derivação</b>, porque a árvore filtra a ordem das substituições.',
+    chaves:[
+      {k:'esquerda: nao terminal mais a esquerda', syn:['esquerda']},
+      {k:'direita: nao terminal mais a direita', syn:['direita']},
+      {k:'mesma arvore', syn:['arvore','árvore','mesma']}
+    ] },
+  { id:'b-op6', tipo:'open', titulo:'6) Árvore de derivação',
+    enunciado:'O que é uma árvore de derivação? Cite as regras para montá-la.',
+    gabarito:'É uma representação gráfica de uma derivação que filtra a ordem das substituições. Cada nó interno representa a aplicação de uma produção e é rotulado com o não terminal da cabeça; os filhos são os símbolos do corpo, da esquerda para a direita; as folhas são os terminais.',
+    chaves:[
+      {k:'representacao grafica', syn:['grafic','gráfic']},
+      {k:'no interno = producao', syn:['produc','produç']},
+      {k:'filhos da esquerda para a direita', syn:['esquerda para a direita','esquerda p','esquerda']},
+      {k:'folhas = terminais', syn:['folha','terminal']}
+    ] }
+  ]
+}
+
+], };

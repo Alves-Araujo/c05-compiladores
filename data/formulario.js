@@ -191,4 +191,78 @@ const FORMULARIO = { p1:[
     ['Coerção','Coercion']
   ]}
 
-], p2:[] };
+], p2:[
+
+{ id:'f2-afd', ico:'Σ', titulo:'AFD — quíntupla', tipo:'kv',
+  v:[
+    ['A = (Q, Σ, δ, q0, F)','quíntupla do autômato finito determinístico'],
+    ['Q','conjunto de estados'],
+    ['Σ','alfabeto de entrada (símbolos)'],
+    ['δ','função de transição: estado × símbolo → estado'],
+    ['q0','estado inicial (único)'],
+    ['F','estados de aceitação (podem ser vários)']
+  ]},
+
+{ id:'f2-notacoes', ico:'🗺️', titulo:'Como ler diagrama e tabela de transição', tipo:'table',
+  head:['Notação','Como é','Como ler'],
+  rows:[
+    ['Diagrama','grafo: estados e arcos','círculo = estado; seta = transição; seta sem origem = início; círculo duplo = aceitação'],
+    ['Tabela','linhas = estados; colunas = símbolos','<code>-&gt;</code> = inicial; <code>*</code> = aceitação; — = sem transição (rejeita)']
+  ]},
+
+{ id:'f2-dfa-afn', ico:'⚖️', titulo:'AFD × AFN × AFN-ε', tipo:'table',
+  head:['','AFD (DFA)','AFN (NFA)'],
+  rows:[
+    ['Saída ao ler um símbolo','um único estado, previsível','conjunto de estados (várias saídas)'],
+    ['Tempo para reconhecer','no geral, menor','no geral, maior'],
+    ['ε-transições','não pode','pode'],
+    ['Construção','mais difícil','mais fácil'],
+    ['Inclusão','todo AFD é AFN','nem todo AFN é AFD']
+  ]},
+
+{ id:'f2-thompson', ico:'🧩', titulo:'Construção de Thompson (REGEX → AFN-ε)', tipo:'table',
+  head:['Expressão','Construção'],
+  rows:[
+    ['<b>a</b> (um símbolo)','início —a→ aceitação'],
+    ['<b>ε</b>','início —ε→ aceitação'],
+    ['<b>rs</b> (concatenação)','aceitação de r —ε→ início de s'],
+    ['<b>r|s</b> (união)','novo início —ε→ início de r e de s; aceitação de r e de s —ε→ nova aceitação'],
+    ['<b>r*</b> (fecho de Kleene)','como r|…, com início —ε→ aceitação (aceita vazia); aceitação de r —ε→ início de r (repete)'],
+    ['<b>r+</b> (repetição positiva)','aceitação de r —ε→ início de r (sem novos estados)']
+  ]},
+
+{ id:'f2-epsilon', ico:'ε', titulo:'ε-fecho e conversões', tipo:'list',
+  v:[
+    '<b>ε-fecho(s)</b>: estados alcançáveis a partir de s por zero ou mais ε-transições. Sempre contém s.',
+    '<b>AFN → AFD (8 passos):</b> tabela do AFN; tabela do AFD pelo produto cartesiano (com o vazio); marcar aceitação; preencher transições (união); eliminar inacessíveis; montar; eliminar sem saída e não finais; testar entradas.',
+    '<b>AFN-ε → AFD (6 passos):</b> ε-fecho do inicial; tabela dos fechamentos; S_a e seu ε-fecho; repetir até não criar novos; marcar aceitação; desenhar.',
+    'Máximo de estados do AFD: 2<sup>k</sup> para um AFN com k estados.'
+  ]},
+
+{ id:'f2-glc', ico:'📐', titulo:'Gramática Livre de Contexto', tipo:'kv',
+  v:[
+    ['G = (T, N, S, P)','quádrupla da GLC'],
+    ['T','terminais (tokens, operadores, pontuação, dígitos)'],
+    ['N','não terminais (variáveis sintáticas, maiúsculas)'],
+    ['S','símbolo inicial (um não terminal)'],
+    ['P','produções: cabeça (não terminal) → corpo'],
+    ['Símbolo de produção','<code>-&gt;</code>, <code>:</code> ou <code>:=</code>']
+  ]},
+
+{ id:'f2-deriv', ico:'🌳', titulo:'Derivação e árvore de derivação', tipo:'list',
+  v:[
+    '<b>Derivação:</b> a partir do símbolo inicial, substitui-se um não terminal pelo corpo de uma de suas produções, a cada passo.',
+    '<b>Mais à esquerda:</b> sempre o não terminal mais à esquerda. <b>Mais à direita:</b> sempre o mais à direita.',
+    '<b>Nó interno</b> = aplicação de uma produção, rotulado pela cabeça. <b>Filhos</b> = símbolos do corpo, da esquerda para a direita. <b>Folhas</b> = terminais.',
+    'Uma árvore pode corresponder a várias derivações (a árvore filtra a ordem das substituições).',
+    '<b>Pré-ordem</b> (raiz, esquerda, direita): enumeração dos nós pelo passo de derivação.'
+  ]},
+
+{ id:'f2-pipeline', ico:'🔗', titulo:'Análise léxica × sintática', tipo:'list',
+  v:[
+    '<b>Léxica:</b> lê os caracteres, agrupa em lexemas e produz tokens (usa AFDs e expressões regulares).',
+    '<b>Sintática:</b> recebe os tokens, verifica se a estrutura é válida pela GLC e produz a árvore de derivação.',
+    'Expressões regulares não descrevem estruturas aninhadas (parênteses, expressões dentro de expressões): para isso usa-se a GLC.'
+  ]}
+
+], };
