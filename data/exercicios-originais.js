@@ -1,9 +1,10 @@
 /* =============================================================
-   EXERCÍCIOS ORIGINAIS DO MATERIAL  (Prova 1)
-   Nada aqui é inventado: são os Exemplos 1 a 4 dos slides.
+   EXERCÍCIOS ORIGINAIS DO MATERIAL  (Provas 1 e 2)
+   Nada aqui é inventado: na P1, os Exemplos 1 a 4 dos slides; na P2,
+   os enunciados da lista de exercícios de GLC do professor.
    Os gabaritos são a resolução dos exercícios propostos.
 
-   Tipos: 'tokenize' | 'open' | 'regex'
+   Tipos: 'tokenize' | 'open' | 'regex' | 'mc' | 'multi' | 'order' | 'cadeias'
    ============================================================= */
 
 const EX_ORIGINAIS = { p1:[
@@ -154,4 +155,131 @@ const EX_ORIGINAIS = { p1:[
   ]
 }
 
-], p2:[] };
+], p2:[
+
+/* ---------------- LISTA DE GLC — GRAMÁTICA 1 ---------------- */
+{
+  grupo:'Lista de GLC — Gramática 1',
+  fonte:'Lista de exercícios do professor (Cap. 3) · questões 1 a 5 · gabarito resolvido aqui e conferido por código',
+  enunciado:'Responda as seguintes perguntas sobre a Gramática Livre de Contexto (G) abaixo.<pre>R -&gt; XRX | S\nS -&gt; aTb | bTa\nT -&gt; XTX | X | ε\nX -&gt; a | b</pre>',
+  itens:[
+  { id:'o2-1', tipo:'multi', titulo:'1) Quais são os símbolos não-terminais de G?',
+    opcoes:['R','S','T','X','a','b','ε'], correta:[0,1,2,3],
+    just:'Os não-terminais são os que aparecem do lado esquerdo das produções: <b>R, S, T e X</b>. Os símbolos a e b são terminais, e ε é a cadeia vazia (não é um símbolo da gramática).' },
+  { id:'o2-2', tipo:'multi', titulo:'2) Quais são os símbolos terminais de G?',
+    opcoes:['R','S','T','X','a','b','ε'], correta:[4,5],
+    just:'Terminais: <b>a e b</b>. O ε não é terminal: ele representa a cadeia vazia.' },
+  { id:'o2-3', tipo:'mc', titulo:'3) Qual é o símbolo de início de G?',
+    opcoes:['R','S','T','X'], correta:0,
+    just:'O símbolo inicial é <b>R</b>, o lado esquerdo da primeira produção. Cuidado: aqui a letra S não é a inicial, é só mais um não-terminal.' },
+  { id:'o2-4', tipo:'cadeias', titulo:'4) Apresente 2 strings válidas em G.', valida:true, n:2,
+    dica:'Digite duas cadeias diferentes. O site testa se cada uma é gerada pela gramática.',
+    pertence: s => /^[ab]+$/.test(s) && s !== s.split('').reverse().join(''),
+    gabarito:'<p style="margin:0 0 8px">Exemplos: <code>ab</code>, <code>ba</code>, <code>aab</code>, <code>abb</code>, <code>abab</code>. Derivação de <code>ab</code>: R ⇒ S ⇒ aTb ⇒ ab (usando T ⇒ ε).</p><p style="margin:0">Por que funciona: S exige que as pontas sejam diferentes (a…b ou b…a), e R ⇒ XRX acrescenta um símbolo qualquer em cada ponta. Assim, G gera exatamente as cadeias sobre {a, b} que <b>não são palíndromos</b>.</p>' },
+  { id:'o2-5', tipo:'cadeias', titulo:'5) Apresente 2 strings não válidas em G.', valida:false, n:2,
+    dica:'Digite duas cadeias diferentes. Para a cadeia vazia, escreva ε.',
+    pertence: s => /^[ab]+$/.test(s) && s !== s.split('').reverse().join(''),
+    gabarito:'<p style="margin:0 0 8px">Exemplos: <code>a</code>, <code>aa</code>, <code>aba</code>, <code>abba</code> e a cadeia vazia ε. Todos são palíndromos, e G não gera palíndromos.</p><p style="margin:0">A menor cadeia de G tem 2 símbolos (S ⇒ aTb ⇒ ab), então <code>a</code> e ε nunca são gerados. Qualquer cadeia com outro símbolo, como <code>abc</code>, também não pertence.</p>' }
+  ]
+},
+
+/* ---------------- LISTA DE GLC — GRAMÁTICA 2 ---------------- */
+{
+  grupo:'Lista de GLC — Gramática 2 (atribuição)',
+  fonte:'Lista de exercícios do professor (Cap. 3) · questões 6 a 10 · gabarito resolvido aqui e conferido por código',
+  enunciado:'Responda as seguintes perguntas sobre a Gramática Livre de Contexto (G) abaixo.<pre>&lt;assign&gt; -&gt; &lt;id&gt; = &lt;expr&gt;\n&lt;id&gt;     -&gt; A | B | C | D | E\n&lt;expr&gt;   -&gt; &lt;id&gt; + &lt;expr&gt;\n         | &lt;id&gt; - &lt;expr&gt;\n         | &lt;id&gt; * &lt;expr&gt;\n         | &lt;id&gt; / &lt;expr&gt;\n         | (&lt;expr&gt;)\n         | &lt;id&gt;</pre>',
+  itens:[
+  { id:'o2-6', tipo:'multi', titulo:'6) Quais são os símbolos não-terminais de G?',
+    opcoes:['&lt;assign&gt;','&lt;id&gt;','&lt;expr&gt;','A','=','+'], correta:[0,1,2],
+    just:'Os não-terminais são os nomes entre &lt; &gt;: <b>&lt;assign&gt;, &lt;id&gt; e &lt;expr&gt;</b>.' },
+  { id:'o2-7', tipo:'multi', titulo:'7) Quais são os símbolos terminais de G?',
+    opcoes:['A, B, C, D, E','=','+, -, *, /','( e )','&lt;id&gt;','&lt;expr&gt;'], correta:[0,1,2,3],
+    just:'Terminais: <b>A, B, C, D, E, =, +, -, *, /, ( e )</b>. Os símbolos &lt;id&gt; e &lt;expr&gt; são não-terminais.' },
+  { id:'o2-8', tipo:'mc', titulo:'8) Qual é o símbolo inicial de G?',
+    opcoes:['&lt;assign&gt;','&lt;id&gt;','&lt;expr&gt;','A'], correta:0,
+    just:'<b>&lt;assign&gt;</b>: é o lado esquerdo da primeira produção e representa a sentença completa (uma atribuição).' },
+  { id:'o2-9', tipo:'order', titulo:'9) Derivação mais à esquerda',
+    enunciado:'Mostre uma derivação mais à esquerda para a sentença A = B / (C - (D * E)). No site: coloque os passos na ordem.',
+    itens:[
+      '<assign>',
+      '⇒ <id> = <expr>',
+      '⇒ A = <expr>',
+      '⇒ A = <id> / <expr>',
+      '⇒ A = B / <expr>',
+      '⇒ A = B / (<expr>)',
+      '⇒ A = B / (<id> - <expr>)',
+      '⇒ A = B / (C - <expr>)',
+      '⇒ A = B / (C - (<expr>))',
+      '⇒ A = B / (C - (<id> * <expr>))',
+      '⇒ A = B / (C - (D * <expr>))',
+      '⇒ A = B / (C - (D * <id>))',
+      '⇒ A = B / (C - (D * E))'
+    ],
+    just:'Em cada passo, substitui-se o não-terminal mais à esquerda. Por isso os identificadores aparecem da esquerda para a direita: A, depois B, C, D e E.' },
+  { id:'o2-10', tipo:'order', titulo:'10) Derivação mais à direita',
+    enunciado:'Mostre uma derivação mais à direita para a sentença A = B / (C - (D * E)). No site: coloque os passos na ordem.',
+    itens:[
+      '<assign>',
+      '⇒ <id> = <expr>',
+      '⇒ <id> = <id> / <expr>',
+      '⇒ <id> = <id> / (<expr>)',
+      '⇒ <id> = <id> / (<id> - <expr>)',
+      '⇒ <id> = <id> / (<id> - (<expr>))',
+      '⇒ <id> = <id> / (<id> - (<id> * <expr>))',
+      '⇒ <id> = <id> / (<id> - (<id> * <id>))',
+      '⇒ <id> = <id> / (<id> - (<id> * E))',
+      '⇒ <id> = <id> / (<id> - (D * E))',
+      '⇒ <id> = <id> / (C - (D * E))',
+      '⇒ <id> = B / (C - (D * E))',
+      '⇒ A = B / (C - (D * E))'
+    ],
+    just:'Em cada passo, substitui-se o não-terminal mais à direita. Primeiro a expressão inteira é expandida; depois os identificadores são trocados de trás para frente: E, D, C, B e, por último, A.' }
+  ]
+},
+
+/* ---------------- LISTA DE GLC — GRAMÁTICA 3 ---------------- */
+{
+  grupo:'Lista de GLC — Gramática 3 (expressões)',
+  fonte:'Lista de exercícios do professor (Cap. 3) · questões 11 a 13 · gabarito resolvido aqui e conferido por código',
+  enunciado:'Seja G = {{+, *, (, ), a}, {E, T, F}, E, P}, em que P consiste de:<pre>E -&gt; E + T | T\nT -&gt; T * F | F\nF -&gt; (E) | a</pre>',
+  itens:[
+  { id:'o2-11', tipo:'mc', titulo:'11) Verifique se a sentença a + a * a é válida nesta gramática.',
+    opcoes:['Sim, é válida','Não, não é válida'], correta:0,
+    just:'É válida. Uma derivação: E ⇒ E + T ⇒ T + T ⇒ F + T ⇒ a + T ⇒ a + T * F ⇒ a + F * F ⇒ a + a * F ⇒ a + a * a. Chegamos à sentença usando só as produções de G, então ela pertence à linguagem.' },
+  { id:'o2-12', tipo:'open', titulo:'12) Árvore de Derivação mais à esquerda',
+    enunciado:'Crie uma Árvore de Derivação mais à esquerda para a sentença a + a * a. Enumere cada passo da derivação, conforme a árvore é montada. (Na lista original, a árvore é desenhada e enviada pelo imgur. Aqui, escreva a derivação numerada e compare com a árvore do gabarito.)',
+    gabarito:'<b>Derivação mais à esquerda:</b><pre>(1) E ⇒ E + T\n(2)   ⇒ T + T\n(3)   ⇒ F + T\n(4)   ⇒ a + T\n(5)   ⇒ a + T * F\n(6)   ⇒ a + F * F\n(7)   ⇒ a + a * F\n(8)   ⇒ a + a * a</pre><b>Árvore</b> (o número é o passo em que o nó é expandido):<pre>E (1)\n├── E (2)\n│   └── T (3)\n│       └── F (4) ── a\n├── +\n└── T (5)\n    ├── T (6)\n    │   └── F (7) ── a\n    ├── *\n    └── F (8) ── a</pre>',
+    chaves:[
+      {k:'1º passo: E → E + T', syn:['e + t','e+t']},
+      {k:'2º passo (mais à esquerda): T + T', syn:['t + t','t+t']},
+      {k:'uso de T → T * F', syn:['t * f','t*f']}
+    ] },
+  { id:'o2-13', tipo:'open', titulo:'13) Árvore de Derivação mais à direita',
+    enunciado:'Crie uma Árvore de Derivação mais à direita para a sentença a + a * a. Enumere cada passo da derivação, conforme a árvore é montada. (Na lista original, a árvore é desenhada e enviada pelo imgur. Aqui, escreva a derivação numerada e compare com a árvore do gabarito.)',
+    gabarito:'<b>Derivação mais à direita:</b><pre>(1) E ⇒ E + T\n(2)   ⇒ E + T * F\n(3)   ⇒ E + T * a\n(4)   ⇒ E + F * a\n(5)   ⇒ E + a * a\n(6)   ⇒ T + a * a\n(7)   ⇒ F + a * a\n(8)   ⇒ a + a * a</pre><b>Árvore</b> (o número é o passo em que o nó é expandido). A forma é a mesma da questão 12; só muda a numeração:<pre>E (1)\n├── E (6)\n│   └── T (7)\n│       └── F (8) ── a\n├── +\n└── T (2)\n    ├── T (4)\n    │   └── F (5) ── a\n    ├── *\n    └── F (3) ── a</pre>',
+    chaves:[
+      {k:'1º passo: E → E + T', syn:['e + t','e+t']},
+      {k:'2º passo (mais à direita): E + T * F', syn:['e + t * f','e+t*f']},
+      {k:'termina em a + a * a', syn:['a + a * a','a+a*a']}
+    ] }
+  ]
+},
+
+/* ---------------- LISTA DE GLC — PESQUISA ---------------- */
+{
+  grupo:'Lista de GLC — Pesquisa',
+  fonte:'Lista de exercícios do professor (Cap. 3) · questão 14 · gabarito resolvido aqui e conferido por código',
+  enunciado:'Pesquisa.',
+  itens:[
+  { id:'o2-14', tipo:'open', titulo:'14) Gramática ambígua',
+    enunciado:'Faça uma breve pesquisa e responda o que é uma gramática ambígua, fornecendo um exemplo para ilustrar esta situação.',
+    gabarito:'Uma gramática é <b>ambígua</b> quando existe pelo menos uma sentença com <b>mais de uma árvore de derivação</b> (ou, de forma equivalente, com mais de uma derivação mais à esquerda). <b>Exemplo:</b> E → E + E | E * E | id. A sentença <code>id + id * id</code> tem duas árvores:<pre>Árvore 1: E ⇒ E + E ⇒ id + E ⇒ id + E * E ⇒ id + id * E ⇒ id + id * id\nÁrvore 2: E ⇒ E * E ⇒ E + E * E ⇒ id + E * E ⇒ id + id * E ⇒ id + id * id</pre>Na primeira, a soma fica na raiz e a multiplicação é feita antes: id + (id * id). Na segunda, a multiplicação fica na raiz e a soma é feita antes: (id + id) * id. A gramática da questão 11 (E → E + T | T; T → T * F | F; F → (E) | a) elimina essa ambiguidade fixando a precedência. A gramática do Exemplo 3 da matéria (exp → exp op exp | (exp) | num) também é ambígua.',
+    chaves:[
+      {k:'mais de uma árvore de derivação', syn:['mais de uma arvore','duas arvores','mais de uma derivacao','duas derivacoes','duas ou mais']},
+      {k:'para a mesma sentença', syn:['mesma sentenca','mesma cadeia','mesma string','mesma palavra','mesma expressao']},
+      {k:'um exemplo concreto', syn:['exemplo','ex:','ex.','id + id','e + e','e+e']}
+    ] }
+  ]
+}
+
+], };

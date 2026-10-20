@@ -60,7 +60,9 @@ function renderExercicios(root, prova){
       '<button data-tab="orig" class="' + (tab==='orig'?'on':'') + '">' +
         '<span class="t">📘 Originais do material <span class="badge-src">material oficial</span></span>' +
         '<span class="d">' + (orig.length
-          ? 'Exatamente os Exemplos 1 a 4 dos slides, com correção e gabarito comentado. ' + nOrig + ' questões.'
+          ? (prova === 'p1'
+              ? 'Exatamente os Exemplos 1 a 4 dos slides, com correção e gabarito comentado. '
+              : 'A lista de exercícios de GLC que o professor liberou, com correção e gabarito comentado. ') + nOrig + ' questões.'
           : 'Os exemplos originais desta prova ainda não foram cadastrados.') + '</span>' +
       '</button>' +
       '<button data-tab="ia" class="ai ' + (tab==='ia'?'on':'') + '">' +
@@ -241,6 +243,54 @@ INIT.regex = (node, it) => {
   qs('[data-act=lab]', node).onclick = () => {
     RX_PREFILL = { re: inp.value.trim() || it.gabarito, txt: casos.map(c => c.s).join('\n') };
     location.hash = '#/regex';
+  };
+};
+
+/* ----------------- CADEIAS (escreva cadeias que pertencem ou não a uma gramática) ----------------- */
+BODY.cadeias = it =>
+  (it.dica ? '<div class="note" style="font-size:13px">💡 ' + it.dica + '</div>' : '') +
+  '<div class="cad-in">' + Array.from({length: it.n || 2}, (_, i) =>
+    '<input type="text" class="mono" data-cad="' + i + '" placeholder="cadeia ' + (i + 1) + '" spellcheck="false" autocomplete="off">').join('') + '</div>' +
+  '<div class="actions"><button class="btn primary" data-act="check">Testar</button>' +
+  '<button class="btn" data-act="gab">Ver gabarito</button></div>' +
+  '<div class="tests" data-tests></div>';
+
+INIT.cadeias = (node, it) => {
+  const inps = qsa('[data-cad]', node);
+  const salvo = DB.get(it.id).ans || [];
+  inps.forEach((inp, i) => { inp.value = salvo[i] || ''; });
+  // espaços são ignorados; "ε" sozinho representa a cadeia vazia
+  const limpa = v => { const s = v.replace(/\s+/g, ''); return s === 'ε' ? '' : s; };
+
+  qs('[data-act=check]', node).onclick = () => {
+    const brutos = inps.map(inp => inp.value);
+    DB.set(it.id, {ans: brutos});
+    if(brutos.some(v => !v.trim())){
+      fb(node, 'bad', '<h6>Preencha as ' + inps.length + ' cadeias 🙂</h6><p style="margin:0">Para a cadeia vazia, escreva ε.</p>');
+      return;
+    }
+    const cads = brutos.map(limpa);
+    const repetida = new Set(cads).size !== cads.length;
+    let acertos = 0;
+    qs('[data-tests]', node).innerHTML = cads.map(s => {
+      const dentro = it.pertence(s), ok = dentro === it.valida;
+      if(ok) acertos++;
+      return '<div class="tcase ' + (ok?'pass':'fail') + '"><span class="ic">' + (ok?'✓':'✕') + '</span>' +
+             '<span>' + vazioTxt(s) + '</span>' +
+             '<span class="exp">' + (dentro ? 'pertence a G' : 'não pertence a G') + '</span></div>';
+    }).join('');
+    const tudo = acertos === cads.length && !repetida;
+    fb(node, tudo ? 'ok' : 'bad', placar(acertos, cads.length) +
+      (repetida ? '<p style="margin:0">As cadeias precisam ser <b>diferentes</b> entre si.</p>'
+        : tudo ? '<p style="margin:0">' + (it.valida ? 'Todas as cadeias são geradas pela gramática.' : 'Nenhuma das cadeias é gerada pela gramática.') + '</p>'
+        : '<p style="margin:0">Veja acima qual cadeia não atende ao pedido. Se precisar, abra o gabarito.</p>'));
+    setStatus(node, tudo ? 'ok' : 'bad');
+  };
+  inps.forEach(inp => inp.addEventListener('keydown', e => { if(e.key === 'Enter') qs('[data-act=check]', node).click(); }));
+
+  qs('[data-act=gab]', node).onclick = () => {
+    fb(node, '', '<h6>📖 Gabarito</h6>' + it.gabarito);
+    if(!DB.get(it.id).st) setStatus(node, 'part');
   };
 };
 

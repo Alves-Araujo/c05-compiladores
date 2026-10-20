@@ -401,6 +401,10 @@ input.mono,textarea.mono{font-family:var(--mono);font-size:13.5px}
 .tcase.pass{border-color:color-mix(in srgb,var(--ok) 45%,transparent);background:var(--ok-soft)}
 .tcase.fail{border-color:color-mix(in srgb,var(--err) 45%,transparent);background:var(--err-soft)}
 
+/* cadeias (escreva cadeias de uma gramática) */
+.cad-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.grupo-head pre{margin:10px 0 0}
+
 /* opções (mc / tf / accept) */
 .opts{display:grid;gap:8px}
 .opt{

@@ -81,6 +81,13 @@ function pintarPipe(node){
   pintar();
 }
 
+// rótulo do índice: "Cap. 2 · Parte 2" em vez de "Cap. 2" repetido
+function rotuloToc(titulo){
+  const base = titulo.split('—')[0].trim();
+  const parte = (titulo.match(/\(Parte (\d)\)/) || [])[1];
+  return parte ? base + ' · Parte ' + parte : base;
+}
+
 function renderMateria(root, prova){
   PIPES = [];
   const caps = CONTEUDO[prova] || [];
@@ -88,7 +95,7 @@ function renderMateria(root, prova){
   if(!caps.length){ root.innerHTML = vazioP2('a matéria'); return; }
 
   const toc = caps.map(c =>
-    '<a href="#' + c.id + '" class="lvl1"><b>' + esc(c.titulo.split('—')[0].trim()) + '</b></a>' +
+    '<a href="#' + c.id + '" class="lvl1"><b>' + esc(rotuloToc(c.titulo)) + '</b></a>' +
     c.secoes.map(s => '<a href="#' + s.id + '" class="lvl2">' + (s.num ? s.num + ' ' : '') + esc(s.titulo) + '</a>').join('')
   ).join('');
 
